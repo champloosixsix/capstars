@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
+
+env = Env()
+env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +24,25 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(l&@(t#-m&!-s-u4g%9a5@c#&ea^lc2#io@ix-=h!3ig(s05fm'
+SECRET_KEY = env.str(
+  "SECRET_KEY", 
+  default="django-insecure-(l&@(t#-m&!-s-u4g%9a5@c#&ea^lc2#io@ix-=h!3ig(s05fm",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DEBUG", default=False)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["capstars.fly.dev", "localhost", "127.0.0.1", 'capstarsinc.com', 'www.capstarsinc.com',]  
+CSRF_TRUSTED_ORIGINS = ["https://capstars.fly.dev", "https://www.capstarsinc.com", "https://capstarsinc.com"]
+
+STRIPE_TEST_PUBLIC_KEY = env.str("STRIPE_TEST_PUBLIC_KEY", 
+                                 default="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO")
+STRIPE_TEST_SECRET_KEY = env.str("STRIPE_TEST_SECRET_KEY", 
+                                 default="sk_test_51OWmTwJyWwCpCexHYDXAp1WuWaxDN9jCYHQRGD9XGM04O6mqgrDuqiq068mIOHZdxPJp6w1okgj2uI7cKfXasMAF00OPtMZVi1")
+STRIPE_LIVE_MODE = False
+# Needed for webhooks, which are discussed later in the guide.
+DJSTRIPE_WEBHOOK_SECRET = env.str("DJSTRIPE_WEBHOOK_SECRET", "whsec_xxx")
+DJSTRIPE_FOREIGN_KEY_TO_FIELD="id"
 
 
 # Application definition
@@ -36,11 +53,13 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'picks',
     'crispy_forms',
     'crispy_bootstrap5',
     'django_extensions',
+    'djstripe',
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
@@ -49,6 +68,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -81,10 +101,7 @@ WSGI_APPLICATION = 'capstars.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    "default": env.dj_db_url("DATABASE_URL", default="sqlite:///db.sqlite3"),
 }
 
 
@@ -126,6 +143,8 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static'
 ]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -133,5 +152,12 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = "picks.CustomUser"
-LOGIN_REDIRECT_URL = "home"
+LOGIN_REDIRECT_URL = "picks"
 LOGOUT_REDIRECT_URL = "home"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.titan.email"
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True

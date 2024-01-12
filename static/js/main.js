@@ -5,6 +5,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
+
 (function() {
   "use strict";
 
@@ -246,6 +247,10 @@
       once: true,
       mirror: false
     })
+  });
+
+  $("#sendmess").on("click", function() {
+    $(this).prop("disabled", true);
   });
 
 })()

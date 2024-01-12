@@ -6,35 +6,28 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Inner Page - Knight Bootstrap Template</title>
+  <title>Picks - Capstars</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
   <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{% static 'assets/img/caplogosm.png' %}" rel="icon">
+  <link href="{% static 'assets/img/caplogosm.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
-  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Knight
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/knight-free-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
 
 <body>
@@ -44,37 +37,29 @@
     <div class="container d-flex align-items-center justify-content-between">
 
       <div class="logo">
-        <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>
+        <a href="/"><img src="{% static 'assets/img/capstrsml2.png' %}" alt="" class="img-fluid"></a>
       </div>
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a class="nav-link scrollto " href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#pricing">Pricing</a></li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="#!">Settings</a></li>
-                        <li><a class="dropdown-item" href="#!">Activity Log</a></li>
-                        <li><hr class="dropdown-divider" /></li>
-                        {% if user.is_authenticated %}
-                        <li><form method="post" action="{% url 'logout' %}" class="inline">
-                            {% csrf_token %}
-                            <input type="hidden" name="extra_submit_param" value="extra_submit_value">
-                            <button type="submit" name="submit_param" value="submit_value" class="link-button dropdown-item">
-                              Logout
-                            </button>
-                          </form></li>
-                        {% else %}
-                        <li><a class="dropdown-item" href="{% url 'login' %}">Login</a></li>
-                        {% endif %}
-                    </ul>
-                </li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li><a class="nav-link scrollto" href="/#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/#pricing">Pricing</a></li>
+          <li><a class="nav-link scrollto" href="/#contact">Contact</a></li>
+          <li class="dropdown"><a href="#"><span><i class="bi bi-person-fill" style="font-size: 1rem"; ></i></span><i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if user.is_authenticated %}
+              <li><form method="post" action="{% url 'logout' %}" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                <button type="submit" name="submit_param" value="submit_value" class="nav-link" style="padding: 10px 20px; font-size: 15px; text-transform: none; font-weight: 600;">
+                  Logout
+                </button></form></li>
+                <li><a class="nav-link" href="{% url 'picks' %}">Picks</a></li>
+              {% else %}
+              <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+              {% endif %}
+            </ul>
+          </li>
         </ul>
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
@@ -83,32 +68,35 @@
   </header><!-- End Header -->
 
   <main id="main">
-
-    <!-- ======= Breadcrumbs ======= -->
+         <!-- ======= Breadcrumbs ======= -->
     <section class="breadcrumbs">
       <div class="container">
-
-        <div class="d-flex justify-content-between align-items-center">
-          <h2>Inner Page</h2>
-          <ol>
-            <li><a href="index.html">Home</a></li>
-            <li>Inner Page</li>
-          </ol>
-        </div>
-        {% block content %}
-        {% endblock %}
-
+      
+          <div class="d-flex justify-content-between align-items-center">
+           <h2>Todays Picks</h2>
+           <ol>
+             <li><a href="/">Home</a></li>
+             <li>Picks</li>
+           </ol>
+         </div>
       </div>
     </section><!-- End Breadcrumbs -->
-
+    {% if user.verified_member is True %}
     <section class="inner-page">
       <div class="container">
-        <p>
-          Example inner page template
-        </p>
+      {% block content %}
+      {% endblock %}
       </div>
     </section>
-
+    {% else %}
+        <section class="inner-page">
+            <div class="text-center">
+              <p>
+                You are not a Verified Member :(<br> Upgrade your account to gain access to Picks!
+              </p>
+            </div>
+          </section>
+    {% endif %}
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -120,26 +108,23 @@
 
         <div class="row justify-content-center">
           <div class="col-lg-6">
-            <a href="#header" class="scrollto footer-logo"><img src="assets/img/hero-logo.png" alt=""></a>
-            <h3>Knight</h3>
-            <p>Et aut eum quis fuga eos sunt ipsa nihil. Labore corporis magni eligendi fuga maxime saepe commodi placeat.</p>
+            <a href="#header" class="scrollto footer-logo"><img src="{% static 'assets/img/caplogo.png' %}" alt=""></a>
+            <h3></h3>
+            <p>Subscribe to keep up with news and special offers from Capstars.</p>
           </div>
         </div>
 
         <div class="row footer-newsletter justify-content-center">
           <div class="col-lg-6">
             <form action="" method="post">
-              <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe">
+              {% csrf_token %}
+              <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe" disabled>
             </form>
           </div>
         </div>
 
         <div class="social-links">
-          <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-          <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-          <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-          <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-          <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+          <a href="http://127.0.0.1:8000/picks/picks/" class="instagram"><i class="bx bxl-instagram"></i></a>
         </div>
 
       </div>
@@ -147,14 +132,7 @@
 
     <div class="container footer-bottom clearfix">
       <div class="copyright">
-        &copy; Copyright <strong><span>Knight</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/knight-free-bootstrap-theme/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        &copy; Copyright <strong><span><a href="https://webchamploo.com">webChamploo</a></span></strong>. All Rights Reserved
       </div>
     </div>
   </footer><!-- End Footer -->
@@ -162,15 +140,15 @@
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
-  <script src="assets/vendor/aos/aos.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
 
   <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
+  <script src="{% static 'js/main.js' %}"></script>
 
 </body>
 

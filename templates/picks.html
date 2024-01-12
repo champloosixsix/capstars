@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% for pick in object_list %}
+            <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 20rem;">
+                <div class="card-header">{{ pick.category }}</div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ pick.pick }}<br>Units: {{ pick.units }}</h5>
+                  <p class="card-text">Date: {{ pick.pick_date }}<br>Time: {{ pick.pick_time }}</p>
+                </div>
+            </div>
+        {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,145 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Picks - Capstars</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{% static 'assets/img/caplogosm.png' %}" rel="icon">
+  <link href="{% static 'assets/img/caplogosm.png' %}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{% static 'assets/vendor/aos/aos.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <div class="logo">
+        <a href="/"><img src="{% static 'assets/img/capstrsml2.png' %}" alt="" class="img-fluid"></a>
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto" href="/#about">About</a></li>
+          <li><a class="nav-link scrollto" href="/#pricing">Pricing</a></li>
+          <li><a class="nav-link scrollto" href="/#contact">Contact</a></li>
+          <li class="dropdown"><a href="#"><span><i class="bi bi-person-fill" style="font-size: 1rem"; ></i></span><i class="bi bi-chevron-down"></i></a>
+            <ul>
+              {% if user.is_authenticated %}
+              <li><form method="post" action="{% url 'logout' %}" class="inline">
+                {% csrf_token %}
+                <input type="hidden" name="extra_submit_param" value="extra_submit_value">
+                <button type="submit" name="submit_param" value="submit_value" class="nav-link" style="padding: 10px 20px; font-size: 15px; text-transform: none; font-weight: 600;">
+                  Logout
+                </button></form></li>
+                <li><a class="nav-link" href="{% url 'picks' %}">Picks</a></li>
+              {% else %}
+              <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+              {% endif %}
+            </ul>
+          </li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+         <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+      
+          <div class="d-flex justify-content-between align-items-center">
+           <h2>Your Message Was Sent!</h2>
+           <ol>
+             <li><a href="index.html">Home</a></li>
+             <li>Message Sent</li>
+           </ol>
+         </div>
+      </div>
+    </section><!-- End Breadcrumbs -->
+    <section class="inner-page">
+      <div class="container text-center">
+      Thank you for reaching out! We will get back to you as soon as possible.
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+
+    <div class="footer-top">
+
+      <div class="container">
+
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <a href="#header" class="scrollto footer-logo"><img src="{% static 'assets/img/caplogo.png' %}" alt=""></a>
+            <h3></h3>
+            <p>Subscribe to keep up with news and special offers from Capstars.</p>
+          </div>
+        </div>
+
+        <div class="row footer-newsletter justify-content-center">
+          <div class="col-lg-6">
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="email" name="email" placeholder="Enter your Email"><input type="submit" value="Subscribe" disabled>
+            </form>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://www.instagram.com/_capstars_/" class="instagram"><i class="bx bxl-instagram"></i></a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="container footer-bottom clearfix">
+      <div class="copyright">
+        &copy; Copyright <strong><span><a href="https://webchamploo.com">webChamploo</a></span></strong>. All Rights Reserved
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/php-email-form/validate.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+</html>
