@@ -8,7 +8,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserCreationForm
     form = CustomUserChangeForm
     model = CustomUser
-    list_display = ["email", "username", "verified_member"]
+    list_display = ["email", "username","subscription", "customer", "verified_member"]
     list_editable = ['verified_member']
 
 class CustomPicksAdmin(admin.ModelAdmin):

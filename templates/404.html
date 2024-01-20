@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    {% load static %}
+
+     <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+    
+        <div class="d-flex justify-content-between align-items-center">
+         <h2>404</h2>
+         <ol>
+           <li><a href="/">Home</a></li>
+           <li>404</li>
+         </ol>
+       </div>
+    </div>
+  </section><!-- End Breadcrumbs -->
+
+    <div class="container">
+        <h3>There's Nothing Here!</h3>
+        <p>You must have gotten lost, lets go back <a href="/">home</a>.</p>
+    </div><br><br>
+
+  
+    {% endblock %}

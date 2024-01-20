@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+    {% block content %}
+    {% load static %}
+
+     <!-- ======= Breadcrumbs ======= -->
+    <section class="breadcrumbs">
+        <div class="container">
+    
+        <div class="d-flex justify-content-between align-items-center">
+         <h2>Profile</h2>
+         <ol>
+           <li><a href="/">Home</a></li>
+           <li>Profile</li>
+         </ol>
+       </div>
+    </div>
+  </section><!-- End Breadcrumbs -->
+    {% if request.user.subscription %}
+    <div class="container">
+        <h3>Welcome Back <strong class="act">{{ user.username }}</strong>!</h3>
+    </div>
+    <div class="container text-center profile">
+        <br><br>
+        <h5>Your subscription is <span class="act">active</span>!</h5>
+        <p>{{ user.subscription.plan }}</p>
+        <br><br>
+        <div class = profilebtns>
+        <a class="btn btn-primary text-light pickbtn flexitem" href="{% url 'picks' %}">Goto Picks!</a>        
+        
+        <a class="btn btn-primary text-light flexitem" href="https://billing.stripe.com/p/login/fZecPW0IEdv9b4I3cc">Manage Subscription</a>
+        
+        <a class="btn btn-danger text-light flexitem" href="/cancel">Cancel Subscription</a>
+        </div>
+        <br><br><br><br>
+    </div>
+    {% else %}
+    <div class="container">
+        <h3>Welcome Back <strong class="act">{{ user.username }}</strong>!</h3>
+    </div>
+    <div class="container text-center">
+        <br><br>
+        <h5>Your subscription is <span class="dea">not active</span>!</h5>
+        <br><br><br><br>
+    </div>
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing section-bg">
+        <div class="container">
+    
+          <div class="section-title" data-aos="fade-up">
+            <h2>Pricing</h2>
+            <p>Choose the perfect subscription that fits your needs.</p>
+          </div>
+    
+          <div class="row">
+
+            <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+              <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table 
+                pricing-table-id="prctbl_1OXuExJyWwCpCexHWDSCadOV"
+                publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                client-reference-id="{{ request.user.id }}"
+                >
+                </stripe-pricing-table>
+              </div>
+            </div>
+    
+            <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+              <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table 
+                pricing-table-id="prctbl_1OXuFfJyWwCpCexHWR4CnXf1"
+                publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                client-reference-id="{{ request.user.id }}"
+                >
+                </stripe-pricing-table>
+              </div>
+            </div>
+    
+            <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+              <div class="box recommended" data-aos="zoom-in">
+                <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                <stripe-pricing-table 
+                pricing-table-id="prctbl_1OXuG0JyWwCpCexHeTRbijIi"
+                publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                client-reference-id="{{ request.user.id }}"
+                >
+                </stripe-pricing-table>
+              </div>
+            </div>
+    
+          </div>
+    
+        </div>
+    </section><!-- End Pricing Section -->
+    {% endif %}
+    {% endblock %}

@@ -1,10 +1,19 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from djstripe.models import Customer, Subscription
 from django.utils.translation import gettext_lazy as _
 
 class CustomUser(AbstractUser):
     verified_member = models.BooleanField(default=False)
     email = models.EmailField(_('email address'), blank=False)
+    subscription = models.ForeignKey(
+        Subscription, null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The user's Stripe Subscription object, if it exists"
+    )
+    customer = models.ForeignKey(
+        Customer, null=True, blank=True, on_delete=models.SET_NULL,
+        help_text="The user's Stripe Customer object, if it exists"
+    ) 
     pass
     def __str__(self):
         return self.username

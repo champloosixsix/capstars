@@ -65,6 +65,7 @@
                   Logout
                 </button></form></li>
                 <li><a class="nav-link" href="{% url 'picks' %}">Picks</a></li>
+                <li><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
               {% else %}
               <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
               {% endif %}
@@ -184,67 +185,57 @@
       </div>
     </section>< End Services Section -->
 
-    <!-- ======= Pricing Section ======= -->
-    <section id="pricing" class="pricing section-bg">
-      <div class="container">
-
-        <div class="section-title" data-aos="fade-up">
-          <h2>Pricing</h2>
-          <p>Choose the perfect subscription that fits your needs.</p>
-        </div>
-
-        <div class="row">
-
-          <div class="col-lg-4 col-md-6">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <h3>Daily</h3>
-              <h4><sup>$</sup>9.99<span> / day</span></h4>
-              <ul>
-                <li>3-6 Plays</li>
-                <li>1-2 Max Bets</li>
-                <li>Profit Insurance</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#contact" class="btn-buy">Buy Now</a>
-              </div>
+        <!-- ======= Pricing Section ======= -->
+        <section id="pricing" class="pricing section-bg">
+          <div class="container">
+    
+            <div class="section-title" data-aos="fade-up">
+              <h2>Pricing</h2>
+              <p>Choose the perfect subscription that fits your needs.</p>
             </div>
-          </div>
+    
+            <div class="row">
 
-          <div class="col-lg-4 col-md-6 mt-4 mt-lg-0">
-            <div class="box" data-aos="zoom-in" data-aos-delay="100">
-              <h3>Weekly</h3>
-              <h4><sup>$</sup>29.99<span> / week</span></h4>
-              <ul>
-                <li>3-6 Plays per Day</li>
-                <li>2 Max Bets</li>
-                <li>Profit Insurance</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#contact" class="btn-buy">Buy Now</a>
+              <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                  <stripe-pricing-table 
+                  pricing-table-id="prctbl_1OXuExJyWwCpCexHWDSCadOV"
+                  publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                  client-reference-id="{{ request.user.id }}"
+                  >
+                  </stripe-pricing-table>
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
-            <div class="box recommended" data-aos="zoom-in">
-              <span class="recommended-badge">Recommended</span>
-              <h3>Monthly</h3>
-              <h4><sup>$</sup>99.99<span> / month</span></h4>
-              <ul>
-                <li>4-6 Plays per Day</li>
-                <li>2 Max Bets</li>
-                <li>Money Back Guarantee</li>
-              </ul>
-              <div class="btn-wrap">
-                <a href="#contact" class="btn-buy">Buy Now</a>
+    
+              <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box" data-aos="zoom-in" data-aos-delay="100">
+                  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                  <stripe-pricing-table 
+                  pricing-table-id="prctbl_1OXuFfJyWwCpCexHWR4CnXf1"
+                  publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                  client-reference-id="{{ request.user.id }}"
+                  >
+                  </stripe-pricing-table>
+                </div>
               </div>
+    
+              <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+                <div class="box recommended" data-aos="zoom-in">
+                  <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+                  <stripe-pricing-table 
+                  pricing-table-id="prctbl_1OXuG0JyWwCpCexHeTRbijIi"
+                  publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+                  client-reference-id="{{ request.user.id }}"
+                  >
+                  </stripe-pricing-table>
+                </div>
+              </div>
+    
             </div>
+    
           </div>
-
-        </div>
-
-      </div>
-    </section><!-- End Pricing Section -->
+        </section><!-- End Pricing Section -->
 
     <!-- ======= Frequently Asked Questions Section =======
     <section id="faq" class="faq">

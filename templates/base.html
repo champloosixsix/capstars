@@ -55,6 +55,7 @@
                   Logout
                 </button></form></li>
                 <li><a class="nav-link" href="{% url 'picks' %}">Picks</a></li>
+                <li><a class="nav-link" href="{% url 'profile' %}">Profile</a></li>
               {% else %}
               <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
               {% endif %}
@@ -68,35 +69,8 @@
   </header><!-- End Header -->
 
   <main id="main">
-         <!-- ======= Breadcrumbs ======= -->
-    <section class="breadcrumbs">
-      <div class="container">
-      
-          <div class="d-flex justify-content-between align-items-center">
-           <h2>Todays Picks</h2>
-           <ol>
-             <li><a href="/">Home</a></li>
-             <li>Picks</li>
-           </ol>
-         </div>
-      </div>
-    </section><!-- End Breadcrumbs -->
-    {% if user.verified_member is True %}
-    <section class="inner-page">
-      <div class="container">
       {% block content %}
       {% endblock %}
-      </div>
-    </section>
-    {% else %}
-        <section class="inner-page">
-            <div class="text-center">
-              <p>
-                You are not a Verified Member :(<br> Upgrade your account to gain access to Picks!
-              </p>
-            </div>
-          </section>
-    {% endif %}
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->

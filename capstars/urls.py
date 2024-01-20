@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('picks.urls')),
     path('picks/', include('django.contrib.auth.urls')),
+    path("stripe/", include("djstripe.urls", namespace="djstripe")),
 ]

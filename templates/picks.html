@@ -1,14 +1,94 @@
 {% extends 'base.html' %}
 {% block content %}
 
-{% for pick in object_list %}
-            <div class="card text-dark bg-light mb-3 mx-auto" style="max-width: 20rem;">
-                <div class="card-header">{{ pick.category }}</div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ pick.pick }}<br>Units: {{ pick.units }}</h5>
-                  <p class="card-text">Date: {{ pick.pick_date }}<br>Time: {{ pick.pick_time }}</p>
-                </div>
+ <!-- ======= Breadcrumbs ======= -->
+<section class="breadcrumbs">
+  <div class="container">
+  
+      <div class="d-flex justify-content-between align-items-center">
+       <h2>Todays Picks</h2>
+       <ol>
+         <li><a href="/">Home</a></li>
+         <li>Picks</li>
+       </ol>
+     </div>
+  </div>
+</section><!-- End Breadcrumbs -->
+{% if request.user.is_authenticated %}
+  {% if request.user.subscription %}
+    <section class="inner-page">
+      <div class="container">
+        {% for pick in object_list %}
+          <div class="shadow-lg card pick-card text-dark bg-light mb-3 mx-auto" style="max-width: 20rem;">
+            <div class="card-header">{{ pick.category }}</div>
+            <div class="card-body">
+              <h5 class="card-title">{{ pick.pick }}<br>Units: {{ pick.units }}</h5>
+              <p class="card-text">Date: {{ pick.pick_date }}<br>Time: {{ pick.pick_time }}</p>
+            </div>
             </div>
         {% endfor %}
+      </div>
+    </section>
+  {% else %}
+    <section class="inner-page">
+        <div class="text-center">
+          <h3>Your subsription is currently <span class="dea">inactive</span>.</h3>
+          <p>
+            Upgrade your account to gain access to Picks!
+          </p>
+        </div>
+    </section>
+    <!-- ======= Pricing Section ======= -->
+    <section id="pricing" class="pricing section-bg">
+      <div class="container">
+  
+        <div class="section-title" data-aos="fade-up">
+          <h2>Pricing</h2>
+          <p>Choose the perfect subscription that fits your needs.</p>
+        </div>
+  
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+              <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+              <stripe-pricing-table 
+              pricing-table-id="prctbl_1OXuExJyWwCpCexHWDSCadOV"
+              publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+              client-reference-id="{{ request.user.id }}"
+              >
+              </stripe-pricing-table>
+            </div>
+          </div>
+  
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box" data-aos="zoom-in" data-aos-delay="100">
+              <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+              <stripe-pricing-table 
+              pricing-table-id="prctbl_1OXuFfJyWwCpCexHWR4CnXf1"
+              publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+              client-reference-id="{{ request.user.id }}"
+              >
+              </stripe-pricing-table>
+            </div>
+          </div>
+  
+          <div class="col-lg-4 col-md-6 mt-4 mt-md-0">
+            <div class="box recommended" data-aos="zoom-in">
+              <script async src="https://js.stripe.com/v3/pricing-table.js"></script>
+              <stripe-pricing-table 
+              pricing-table-id="prctbl_1OXuG0JyWwCpCexHeTRbijIi"
+              publishable-key="pk_test_51OWmTwJyWwCpCexHBSckuXe6SFYkumGspfZyiXbvwbkh4STtH0eE5FnLeYeYZN7BZaH2GxBLOlzgvn9RRVk2tF7u00AGbeuHbO"
+              client-reference-id="{{ request.user.id }}"
+              >
+              </stripe-pricing-table>
+            </div>
+          </div>
+  
+        </div>
+  
+      </div>
+    </section><!-- End Pricing Section -->
+  {% endif %}
+{% endif %}
 
 {% endblock %}
