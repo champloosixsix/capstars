@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import SignUpView, PicksView, HomeView, ThanksView, CancelView, subscription_confirm, profile, cancel
+from .views import SignUpView, PicksView, HomeView, ThanksView, CancelView, subscription_confirm, profile, cancel, TermsView, PropView
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
@@ -11,5 +11,7 @@ urlpatterns = [
     path("profile/", profile, name="profile"),
     path("cancel/", cancel, name="cancel"),
     path("cancel-confirm/", CancelView.as_view(), name='cancel_confirm'),
+    path('tos', TermsView.as_view(), name='tos'),
+    path('prop/', PropView.as_view(), name='prop'),
    
 ]

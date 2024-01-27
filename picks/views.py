@@ -133,3 +133,9 @@ class CancelView(TemplateView):
                 return HttpResponse("Invalid header found.")
             return HttpResponseRedirect('/picks/thankyou')
         return render(request, '/picks/thankyou')
+    
+class TermsView(TemplateView):
+    template_name = 'tos.html'
+
+class PropView(TemplateView):
+    template_name = 'prop.html'

@@ -1701,4 +1701,9 @@ section {
   background-image: radial-gradient(circle,rgba(255, 255, 255,1), rgba(171, 235, 182, 1) 100%)!important;
 }
 
+.tos {
+  display: flex;
+  justify-content: space-evenly;
+}
+
 
